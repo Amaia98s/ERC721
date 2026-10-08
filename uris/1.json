@@ -1,0 +1,11 @@
+{
+    "name": "Blockchain Accelerator NFT 1",
+    "description": "NFT collection by Blockchain Accelerator - Jose Cruz",
+    "image": "",
+    "attributes": [
+        {
+            "trait_tipe":"Rarity",
+            "value": "1"
+        }
+    ]
+}
