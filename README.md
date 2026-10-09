@@ -54,6 +54,17 @@ source .env
 forge script script/DeployNFTCollection.s.sol --rpc-url <URL_RPC> --broadcast
 ```
 
+## Tests
+
+`test/BANFTCollection.t.sol` incluye 7 tests que verifican:
+
+- Despliegue con el nombre, el símbolo, el suministro máximo y la base URI correctos.
+- Acuñación del NFT y asignación al usuario que lo acuña.
+- Ids consecutivos (0, 1, ...) en acuñaciones sucesivas.
+- Evento `MintNFT` emitido con el id recién acuñado.
+- Rechazo con `"Sold out"` al superar el suministro máximo.
+- `tokenURI` correcto, y error al pedirlo para un token que no existe.
+
 ## Uso
 
 Requiere [Foundry](https://book.getfoundry.sh/getting-started/installation).
@@ -62,6 +73,7 @@ Requiere [Foundry](https://book.getfoundry.sh/getting-started/installation).
 git clone --recursive https://github.com/Amaia98s/ERC721.git
 cd ERC721
 forge build
+forge test -vvv
 ```
 
 ## Tecnologías

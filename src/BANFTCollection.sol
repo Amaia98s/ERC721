@@ -26,7 +26,7 @@ contract BANFTCollection is ERC721 {
         _safeMint(msg.sender, currentTokenId);
         currentTokenId++;
 
-        emit MintNFT(msg.sender, currentTokenId--);
+        emit MintNFT(msg.sender, currentTokenId - 1);
     }
 
     function _baseURI() internal view virtual override returns (string memory) {
