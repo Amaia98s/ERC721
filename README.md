@@ -1,66 +1,69 @@
-## Foundry
+# Blockchain Accelerator NFT (BANFT)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Colección de NFTs basada en el estándar **ERC-721**, construida con [Foundry](https://getfoundry.sh) y [OpenZeppelin](https://openzeppelin.com/contracts). Las imágenes y los metadatos están alojados en **IPFS**.
 
-Foundry consists of:
+## El contrato: `BANFTCollection.sol`
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Hereda de `ERC721` de OpenZeppelin y añade:
 
-## Documentation
+| Elemento | Descripción |
+|---|---|
+| `mint()` | Cualquier usuario puede acuñar un NFT, sin coste, mientras queden disponibles. Revierte con `"Sold out"` al alcanzar el máximo. |
+| `totalSupply` | Número máximo de NFTs de la colección (se fija en el despliegue). |
+| `currentTokenId` | Contador del siguiente `tokenId` a acuñar. |
+| `baseUri` | Ruta base de los metadatos (una carpeta de IPFS). |
+| `tokenURI(id)` | Devuelve `baseUri + id + ".json"`, por ejemplo `ipfs://<CID>/0.json`. |
+| `MintNFT` | Evento emitido en cada acuñación. |
 
-https://book.getfoundry.sh/
+Usa `_safeMint`, que comprueba que, si el receptor es un contrato, este sepa recibir NFTs.
 
-## Usage
+## Metadatos
 
-### Build
+La carpeta `uris/` contiene el JSON de cada token en el formato estándar de metadatos que leen OpenSea y otros marketplaces:
 
-```shell
-$ forge build
+```json
+{
+  "name": "Blockchain Accelerator NFT 0",
+  "description": "NFT collection by Blockchain Accelerator - Jose Cruz",
+  "image": "ipfs://bafybeiaqlrja5nohrji6qsj7x5vbncoh6ynoh3gyri74hi2ske7nkw676a",
+  "attributes": [{ "trait_tipe": "Rarity", "value": 0 }]
+}
 ```
 
-### Test
+Estos archivos se subieron a IPFS y el CID de la carpeta es el `baseUri` del contrato.
 
-```shell
-$ forge test
+## Despliegue
+
+El script `script/DeployNFTCollection.s.sol` despliega la colección con:
+
+- Nombre: `Blockchain Accelerator NFT`
+- Símbolo: `BANFT`
+- Suministro máximo: `2`
+- Base URI: `ipfs://bafybeidorqazjivjlnpvxi7ofqf4qid6qmmochqspmcpl7gwg25eore4ya/`
+
+Lee la clave privada de la variable de entorno `PRIVATE_KEY`. Créala en un archivo `.env` (ya está en el `.gitignore`, **nunca lo subas**):
+
+```bash
+PRIVATE_KEY=0x...
 ```
 
-### Format
+Y ejecuta:
 
-```shell
-$ forge fmt
+```bash
+source .env
+forge script script/DeployNFTCollection.s.sol --rpc-url <URL_RPC> --broadcast
 ```
 
-### Gas Snapshots
+## Uso
 
-```shell
-$ forge snapshot
+Requiere [Foundry](https://book.getfoundry.sh/getting-started/installation).
+
+```bash
+git clone --recursive https://github.com/Amaia98s/ERC721.git
+cd ERC721
+forge build
 ```
 
-### Anvil
+## Tecnologías
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Solidity 0.8.33 · Foundry · OpenZeppelin Contracts (ERC721, Strings) · IPFS
