@@ -30,7 +30,7 @@ La carpeta `uris/` contiene el JSON de cada token en el formato estándar de met
 }
 ```
 
-Estos archivos se subieron a IPFS y el CID de la carpeta es el `baseUri` del contrato.
+Estos archivos se subieron a IPFS y el CID de la carpeta es el `baseUri` del contrato. Como el contenido de IPFS no se puede modificar, la copia publicada todavía tiene la clave antigua `trait_tipe`; para corregirla hay que volver a subir la carpeta `uris/` y desplegar con el nuevo CID.
 
 ## Despliegue
 
