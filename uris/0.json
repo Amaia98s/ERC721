@@ -4,7 +4,7 @@
     "image": "ipfs://bafybeiaqlrja5nohrji6qsj7x5vbncoh6ynoh3gyri74hi2ske7nkw676a",
     "attributes": [
         {
-            "trait_tipe":"Rarity",
+            "trait_type":"Rarity",
             "value": 0
         }
     ]

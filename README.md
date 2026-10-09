@@ -26,7 +26,7 @@ La carpeta `uris/` contiene el JSON de cada token en el formato estándar de met
   "name": "Blockchain Accelerator NFT 0",
   "description": "NFT collection by Blockchain Accelerator - Jose Cruz",
   "image": "ipfs://bafybeiaqlrja5nohrji6qsj7x5vbncoh6ynoh3gyri74hi2ske7nkw676a",
-  "attributes": [{ "trait_tipe": "Rarity", "value": 0 }]
+  "attributes": [{ "trait_type": "Rarity", "value": 0 }]
 }
 ```
 
